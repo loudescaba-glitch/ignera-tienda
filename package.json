@@ -1,0 +1,6 @@
+{
+  "name": "ignera-tienda",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tienda de Ignera con carrito y pago real vía Mercado Pago Checkout Pro."
+}
