@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignera — Marroquinería en cuero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161310;
+    --leather-dark:#9c7f4a;
+    --leather:#a6864f;
+    --leather-mid:#c7a869;
+    --tan:#f3dbb2;
+    --cream:#f6f4f0;
+    --cream-2:#b9b2ac;
+    --stone:#9c9696;
+    --brass:#c7a869;
+    --line: rgba(28,26,23,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+  }
+  h1,h2,h3, .voice{
+    font-family:'Playfair Display', serif;
+    font-weight:400;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block;}
+
+  .stitch{
+    border:none;
+    border-top:2px dashed rgba(34,23,18,0.35);
+    height:0;
+    margin:0;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(239,238,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    padding:22px 40px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    font-size:22px;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    letter-spacing:0.12em;
+  }
+  .logo svg{ width:20px; height:20px; flex-shrink:0; }
+  .logo span{
+    font-family:'Jost',sans-serif;
+    font-size:10px;
+    color:var(--leather-dark);
+    letter-spacing:0.16em;
+    display:block;
+    text-align:center;
+    margin-top:2px;
+  }
+  .nav-links{
+    display:flex; gap:32px; font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .nav-links a{ position:relative; padding-bottom:4px; }
+  .nav-links a:hover{ color:var(--leather-dark); }
+  .nav-cart{
+    display:flex; align-items:center; justify-content:flex-end; gap:22px;
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+  }
+  .btn-outline{
+    border:1px solid var(--ink);
+    padding:9px 20px;
+    border-radius:2px;
+    font-size:14px;
+    transition:background .2s, color .2s;
+  }
+  .btn-outline:hover{ background:var(--ink); color:var(--cream); }
+  .btn-solid{
+    background:var(--ink);
+    color:var(--tan);
+    border:1px solid var(--ink);
+    padding:14px 30px;
+    border-radius:2px;
+    font-size:15px;
+    letter-spacing:0.04em;
+    display:inline-block;
+    transition:background .2s, transform .2s;
+  }
+  .btn-solid:hover{ background:#000; transform:translateY(-1px); }
+
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .nav{ grid-template-columns:1fr auto; }
+    .nav-cart{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    align-items:center;
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 40px 40px;
+    gap:40px;
+  }
+  .kicker{
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+  }
+  .hero .kicker{
+    font-size:14px;
+    color:var(--leather);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(38px,5vw,60px);
+    line-height:1.06;
+    max-width:11ch;
+  }
+  .hero p.lede{
+    margin-top:24px;
+    font-size:17px;
+    max-width:40ch;
+    color:#3d3a35;
+  }
+  .hero .cta-row{
+    margin-top:34px;
+    display:flex; align-items:center; gap:26px;
+  }
+  .hero .cta-note{ font-size:13px; color:#6b655d; }
+
+  .hero-art{
+    background:var(--ink);
+    border-radius:4px;
+    aspect-ratio:1/1.05;
+    position:relative;
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-art svg{ width:70%; height:70%; }
+
+  @media (max-width:860px){
+    .hero{ grid-template-columns:1fr; padding-top:40px; }
+    .hero-art{ order:-1; aspect-ratio:1.3/1; }
+  }
+
+  /* ---------- Marquee strip ---------- */
+  .strip{
+    background:var(--ink);
+    color:var(--cream-2);
+    padding:14px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:13px;
+    letter-spacing:0.04em;
+  }
+  .strip-track{
+    display:inline-flex;
+    animation:scroll 32s linear infinite;
+  }
+  .strip-track span{ padding:0 30px; opacity:0.85; }
+  .strip-track span::after{ content:"—"; margin-left:30px; opacity:0.4; }
+  @keyframes scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .strip-track{ animation:none; }
+  }
+
+  /* ---------- Section heading ---------- */
+  .section{ padding:88px 0; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:48px;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:clamp(28px,3.4vw,38px); max-width:14ch; }
+  .section-head p{ max-width:34ch; font-size:15px; color:#4a453f; }
+
+  /* ---------- Collections (asymmetric) ---------- */
+  .collections{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .coll-card{
+    background:var(--cream);
+    padding:34px 26px;
+    min-height:260px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:background .25s;
+  }
+  .coll-card:hover{ background:var(--cream-2); }
+  .coll-card:nth-child(2){ background:var(--ink); color:var(--tan); }
+  .coll-card:nth-child(2):hover{ background:var(--ink); }
+  .coll-card svg{ width:46px; height:46px; opacity:0.9; }
+  .coll-card h3{ font-size:20px; margin-top:20px; }
+  .coll-card .count{ font-size:13px; color:inherit; opacity:0.65; margin-top:6px; }
+
+  @media (max-width:900px){
+    .collections{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  /* ---------- Product grid, varied sizes ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:minmax(120px,auto);
+    gap:28px;
+  }
+  .card{
+    background:var(--cream-2);
+    border:1px solid var(--line);
+    padding:26px;
+    display:flex; flex-direction:column;
+  }
+  .card .art{
+    flex:1;
+    display:flex; align-items:center; justify-content:center;
+    padding:18px 0 26px;
+  }
+  .card .art svg{ width:100%; height:auto; max-height:150px; }
+  .card .art img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    border-radius:2px;
+  }
+  .card.large .art img, .card.wide .art img{ height:260px; }
+  .card .meta{
+    display:flex; justify-content:space-between; align-items:baseline;
+    border-top:1px dashed rgba(34,23,18,0.3);
+    padding-top:14px;
+  }
+  .card h3{ font-size:17px; }
+  .card .tag{ font-size:12px; color:#6b655d; margin-top:4px; }
+  .card .price{ font-family:'Jost',sans-serif; font-size:15px; }
+
+  .card.large{ grid-column:span 3; }
+  .card.medium{ grid-column:span 2; }
+  .card.wide{ grid-column:span 4; }
+  .card.narrow{ grid-column:span 2; }
+
+  @media (max-width:960px){
+    .grid{ grid-template-columns:repeat(2,1fr); }
+    .card.large,.card.medium,.card.wide,.card.narrow{ grid-column:span 1; }
+  }
+
+  /* ---------- Craft / story ---------- */
+  .craft{
+    background:var(--ink);
+    color:var(--cream);
+  }
+  .craft-inner{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .craft h2{ font-size:clamp(28px,3.4vw,40px); max-width:12ch; color:var(--cream); }
+  .craft-list{ margin-top:30px; display:flex; flex-direction:column; gap:22px; }
+  .craft-item{ display:flex; gap:18px; }
+  .craft-item svg{ width:28px; height:28px; flex-shrink:0; margin-top:2px; }
+  .craft-item h4{ font-family:'Jost',sans-serif; font-size:15px; font-weight:500; margin-bottom:4px; }
+  .craft-item p{ font-size:14px; color:#cdbfa5; max-width:36ch; }
+
+  .craft-visual{
+    aspect-ratio:4/5;
+    border:1px solid rgba(239,238,236,0.25);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    padding:30px;
+  }
+  .craft-visual svg{ width:100%; height:100%; }
+
+  @media (max-width:900px){
+    .craft-inner{ grid-template-columns:1fr; }
+    .craft-visual{ order:-1; }
+  }
+
+  /* ---------- Personalization band ---------- */
+  .personalize{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border:1px solid var(--line);
+  }
+  .personalize > div{ padding:56px; }
+  .personalize .left{ background:var(--tan); }
+  .personalize .right{ background:var(--cream-2); }
+  .personalize h3{ font-size:26px; max-width:14ch; }
+  .personalize p{ margin-top:14px; font-size:15px; max-width:38ch; color:#3d3a35; }
+  .personalize .right p{ color:#4a453f; }
+  .swatches{ display:flex; gap:10px; margin-top:24px; }
+  .swatch{ width:30px; height:30px; border-radius:50%; border:1px solid rgba(0,0,0,0.15); }
+
+  @media (max-width:800px){
+    .personalize{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Testimonial ---------- */
+  .testimonial{
+    text-align:center;
+    max-width:720px;
+    margin:0 auto;
+    padding:100px 40px;
+  }
+  .testimonial p.quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:clamp(22px,2.6vw,28px);
+    line-height:1.5;
+    color:var(--leather-dark);
+  }
+  .testimonial .who{ margin-top:26px; font-size:14px; color:#6b655d; }
+
+  /* ---------- Newsletter / footer ---------- */
+  .newsletter{
+    background:var(--ink);
+    color:var(--cream);
+    padding:70px 0;
+  }
+  .nl-inner{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:30px;
+  }
+  .nl-inner h3{ font-size:26px; max-width:12ch; color:var(--cream); }
+  .nl-form{ display:flex; gap:0; max-width:380px; width:100%; }
+  .nl-form input{
+    flex:1;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid rgba(244,237,225,0.4);
+    color:var(--cream);
+    font-size:15px;
+    padding:10px 4px;
+    font-family:'Jost',sans-serif;
+  }
+  .nl-form input::placeholder{ color:rgba(239,238,236,0.5); }
+  .nl-form input:focus{ outline:none; border-color:var(--cream); }
+  .nl-form button{
+    background:none; border:none; color:var(--cream);
+    border-bottom:1px solid var(--cream);
+    font-size:14px; padding:10px 4px 10px 18px; cursor:pointer;
+  }
+
+  footer{ background:var(--cream-2); padding:60px 0 30px; }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+  }
+  .foot-grid h5{ font-family:'Jost',sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:16px; color:var(--leather-dark); }
+  .foot-grid a, .foot-grid p{ font-size:14px; color:#3d3a35; display:block; margin-bottom:10px; }
+  .foot-grid a:hover{ color:var(--leather-dark); }
+  .foot-bottom{
+    display:flex; justify-content:space-between; margin-top:50px;
+    font-size:12px; color:#8f887e;
+    flex-wrap:wrap; gap:10px;
+  }
+  @media (max-width:800px){
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* ---------- Add to cart button ---------- */
+  .add-to-cart{
+    margin-top:16px;
+    width:100%;
+    background:none;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    padding:11px 0;
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:background .2s, color .2s;
+  }
+  .add-to-cart:hover{ background:var(--ink); color:var(--tan); }
+  .add-to-cart.added{ background:var(--ink); color:var(--tan); }
+
+  /* ---------- Cart drawer ---------- */
+  #cart-overlay{
+    position:fixed; inset:0;
+    background:rgba(22,19,16,0.4);
+    opacity:0; pointer-events:none;
+    transition:opacity .25s;
+    z-index:90;
+  }
+  #cart-overlay.open{ opacity:1; pointer-events:auto; }
+
+  #cart-drawer{
+    position:fixed; top:0; right:0; height:100%;
+    width:min(420px, 100%);
+    background:var(--cream);
+    z-index:95;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    display:flex; flex-direction:column;
+    box-shadow:-8px 0 30px rgba(0,0,0,0.15);
+  }
+  #cart-drawer.open{ transform:translateX(0); }
+
+  .cart-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:26px 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .cart-head h3{ font-size:20px; }
+  .cart-close{
+    background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);
+    line-height:1;
+  }
+  #cart-items{
+    flex:1; overflow-y:auto;
+    padding:10px 28px;
+  }
+  .cart-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:14px;
+    padding:18px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .cart-row-name{ font-family:'Playfair Display',serif; font-size:16px; }
+  .cart-row-price{ font-size:13px; color:#6b655d; margin-top:4px; }
+  .cart-row-qty{
+    display:flex; align-items:center; gap:10px;
+    font-size:14px;
+  }
+  .cart-row-qty button{
+    width:24px; height:24px;
+    border:1px solid var(--line);
+    background:none;
+    cursor:pointer;
+    font-size:14px;
+    line-height:1;
+  }
+  .cart-row-remove{
+    background:none; border:none; font-size:18px; cursor:pointer; color:#9c9696;
+  }
+  #cart-empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#8f887e;
+    font-size:14px;
+  }
+  .cart-foot{
+    padding:22px 28px 28px;
+    border-top:1px solid var(--line);
+  }
+  .cart-total-row{
+    display:flex; justify-content:space-between;
+    font-size:16px;
+    margin-bottom:18px;
+  }
+  .cart-total-row span:last-child{ font-family:'Playfair Display',serif; font-size:19px; }
+  #checkout-btn{
+    width:100%;
+    background:var(--ink);
+    color:var(--tan);
+    border:1px solid var(--ink);
+    padding:15px 0;
+    font-size:14px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:background .2s;
+  }
+  #checkout-btn:hover{ background:#000; }
+  #checkout-btn:disabled{ opacity:0.6; cursor:default; }
+  .cart-mp-note{
+    text-align:center; font-size:11px; color:#8f887e; margin-top:12px;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Status banner ---------- */
+  #status-banner{
+    display:none;
+    background:var(--ink);
+    color:var(--tan);
+    text-align:center;
+    font-size:14px;
+    padding:14px 20px;
+  }
+</style>
+</head>
+<body>
+
+<div id="status-banner"></div>
+
+<header>
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#colecciones">Colecciones</a>
+      <a href="#productos">Productos</a>
+      <a href="#taller">El taller</a>
+    </div>
+    <a href="#" style="text-align:center;">
+      <div class="logo">
+        <svg viewBox="0 0 32 32" fill="none" stroke="#a6864f" stroke-width="1"><path d="M16 28c-5-3-8-7-8-12 0-3 1.5-5.5 3-7-0.5 2 0 3.5 1 4.5-0.5-3 1-6.5 4-8.5-1 3-1 5.5 0.5 7.5 1-2 3-3 5-3-2 2-2.5 4-1.5 6.5 1.5-1 3-1 4 0-2 1-3 2.5-3 4.5 0 5-4 8-6 9z"/></svg>
+        <h1>IGNERA</h1>
+      </div>
+      <span>ACCESORIOS</span>
+    </a>
+    <div class="nav-cart">
+      <a href="#">Ingresar</a>
+      <a href="#" class="btn-outline" id="cart-toggle" onclick="openCart();return false;">Bolsa (<span class="cart-count">0</span>)</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="kicker">Cuero curtido al vegetal · hecho a mano</p>
+    <h1>Piezas que envejecen<br>mejor que nosotros.</h1>
+    <p class="lede">Carteras, bandoleras y billeteras trabajadas a mano en cuero de curtido vegetal, pensadas para acompañar diez, veinte, treinta años de uso.</p>
+    <div class="cta-row">
+      <a href="#productos" class="btn-solid">Ver la colección</a>
+      <span class="cta-note">Envío a todo el país</span>
+    </div>
+  </div>
+  <div class="hero-art">
+    <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55 95 C55 70 78 55 120 55 C162 55 185 70 185 95 L192 195 C192 205 183 213 172 213 L68 213 C57 213 48 205 48 195 Z" stroke="#f3dbb2" stroke-width="1.1"/>
+      <path d="M88 95 L88 70 C88 52 102 40 120 40 C138 40 152 52 152 70 L152 95" stroke="#f3dbb2" stroke-width="1.1"/>
+      <path d="M55 130 L192 130" stroke="#c7a869" stroke-width="1" stroke-dasharray="2 5"/>
+      <rect x="112" y="118" width="16" height="22" rx="2" stroke="#c7a869" stroke-width="1.1"/>
+      <path d="M60 155 L186 155" stroke="#f3dbb2" stroke-opacity="0.3" stroke-width="0.8"/>
+    </svg>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>Curtido vegetal</span><span>Costura a mano</span><span>Herrajes en bronce macizo</span><span>Garantía de por vida</span><span>Hecho en talleres propios</span>
+    <span>Curtido vegetal</span><span>Costura a mano</span><span>Herrajes en bronce macizo</span><span>Garantía de por vida</span><span>Hecho en talleres propios</span>
+  </div>
+</div>
+
+<section class="section" id="colecciones">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Cuatro formas de llevar el cuero</h2>
+      <p>Cada colección responde a un uso distinto del día: de la oficina al fin de semana, de la mano al hombro.</p>
+    </div>
+    <div class="collections">
+      <div class="coll-card">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1c1a17" stroke-width="1.6"><path d="M10 18h28l-2 22H12z"/><path d="M17 18v-4a7 7 0 0114 0v4"/></svg>
+        <div>
+          <h3>Carteras de mano</h3>
+          <p class="count">14 modelos</p>
+        </div>
+      </div>
+      <div class="coll-card">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#efeeec" stroke-width="1.6"><path d="M14 20h20v20H14z"/><path d="M14 20l10-12 10 12" stroke-dasharray="2 4"/><circle cx="24" cy="30" r="2" fill="#efeeec" stroke="none"/></svg>
+        <div>
+          <h3>Bandoleras</h3>
+          <p class="count">9 modelos</p>
+        </div>
+      </div>
+      <div class="coll-card">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1c1a17" stroke-width="1.6"><rect x="12" y="14" width="24" height="26" rx="3"/><path d="M18 14v-3a6 6 0 0112 0v3"/><path d="M12 24h24"/></svg>
+        <div>
+          <h3>Mochilas</h3>
+          <p class="count">6 modelos</p>
+        </div>
+      </div>
+      <div class="coll-card">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1c1a17" stroke-width="1.6"><rect x="10" y="16" width="28" height="18" rx="2"/><path d="M10 22h28" stroke-dasharray="2 3"/></svg>
+        <div>
+          <h3>Billeteras</h3>
+          <p class="count">11 modelos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<section class="section" id="productos">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Piezas destacadas</h2>
+      <p>Una selección de nuestros estilos más buscados esta temporada.</p>
+    </div>
+
+    <div class="grid" id="product-grid">
+      <p id="product-loading" style="grid-column:1/-1; text-align:center; color:#8f887e; padding:40px 0;">Cargando piezas...</p>
+    </div>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<section class="section craft" id="taller">
+  <div class="wrap craft-inner">
+    <div>
+      <p class="kicker" style="color:#f3dbb2;">Nuestro proceso</p>
+      <h2>Del cuero crudo a la última puntada, en un mismo taller.</h2>
+      <div class="craft-list">
+        <div class="craft-item">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#f3dbb2" stroke-width="1.4"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 3"/></svg>
+          <div>
+            <h4>Curtido vegetal, sin apuro</h4>
+            <p>Curtimos con taninos de origen vegetal durante semanas, no horas, para que el cuero gane cuerpo y color propio.</p>
+          </div>
+        </div>
+        <div class="craft-item">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#f3dbb2" stroke-width="1.4"><path d="M6 22 L18 6 L22 10 L10 22Z"/><path d="M14 12l4 4"/></svg>
+          <div>
+            <h4>Costura a doble aguja</h4>
+            <p>Cada pieza se cose a mano con hilo encerado, punto por punto, siguiendo la técnica de la silletería tradicional.</p>
+          </div>
+        </div>
+        <div class="craft-item">
+          <svg viewBox="0 0 28 28" fill="none" stroke="#f3dbb2" stroke-width="1.4"><rect x="7" y="7" width="14" height="14" rx="2"/><path d="M7 14h14"/></svg>
+          <div>
+            <h4>Herrajes en bronce macizo</h4>
+            <p>Nada de chapa: los broches, hebillas y remaches son de bronce sólido y se reemplazan, no se rompen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="craft-visual">
+      <svg viewBox="0 0 200 240" fill="none" stroke="#efeeec" stroke-width="1.4">
+        <path d="M30 60 Q30 30 100 30 Q170 30 170 60 L170 200 Q170 215 155 215 L45 215 Q30 215 30 200 Z"/>
+        <path d="M30 90 L170 90" stroke-dasharray="2 5"/>
+        <path d="M30 150 L170 150" stroke-dasharray="2 5"/>
+        <path d="M60 60 Q60 40 100 40 Q140 40 140 60" stroke="#f3dbb2"/>
+        <circle cx="100" cy="120" r="10" stroke="#f3dbb2"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="personalizar" style="padding:0;">
+  <div class="personalize">
+    <div class="left">
+      <h3>Grabá tus iniciales</h3>
+      <p>Sumá tus iniciales grabadas a fuego en cualquier cartera o billetera de la colección, sin cargo extra.</p>
+      <div class="swatches">
+        <span class="swatch" style="background:#161310;"></span>
+        <span class="swatch" style="background:#9c7f4a;"></span>
+        <span class="swatch" style="background:#c7a869;"></span>
+        <span class="swatch" style="background:#f3dbb2;"></span>
+      </div>
+    </div>
+    <div class="right">
+      <h3>Elegí tu color de cuero</h3>
+      <p>Todos nuestros modelos están disponibles en negro, café oscuro, cognac y miel. El color madura con el uso.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <p class="quote">Compré mi primera cartera Ignera hace siete años. Hoy tiene más carácter que el día que la recibí — y sigue cerrando perfecto.</p>
+  <p class="who">Marina Costa, clienta desde 2019</p>
+</section>
+
+<section class="newsletter">
+  <div class="wrap nl-inner">
+    <h3>Novedades del taller, una vez al mes.</h3>
+    <form class="nl-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="tu@correo.com" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h1 style="font-size:22px;">Ignera</h1>
+        <p style="margin-top:14px; max-width:28ch;">Marroquinería en cuero de curtido vegetal, hecha a mano en nuestro taller.</p>
+      </div>
+      <div>
+        <h5>TIENDA</h5>
+        <a href="#">Carteras de mano</a>
+        <a href="#">Bandoleras</a>
+        <a href="#">Mochilas</a>
+        <a href="#">Billeteras</a>
+      </div>
+      <div>
+        <h5>AYUDA</h5>
+        <a href="#">Envíos</a>
+        <a href="#">Cambios y devoluciones</a>
+        <a href="#">Cuidado del cuero</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div>
+        <h5>TALLER</h5>
+        <a href="#">Nuestra historia</a>
+        <a href="#">Trabajá con nosotros</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ignera Marroquinería</span>
+      <span>Hecho a mano en Argentina</span>
+    </div>
+  </div>
+</footer>
+
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-drawer">
+  <div class="cart-head">
+    <h3>Tu bolsa</h3>
+    <button class="cart-close" onclick="closeCart()">&times;</button>
+  </div>
+  <div id="cart-items"></div>
+  <p id="cart-empty">Todavía no agregaste ninguna pieza.</p>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total">$0</span>
+    </div>
+    <button id="checkout-btn" onclick="checkout()">Finalizar compra</button>
+    <p class="cart-mp-note">Pago seguro procesado por Mercado Pago</p>
+  </div>
+</div>
+
+<script src="cart.js"></script>
+<script src="products.js"></script>
+</body>
+</html>
