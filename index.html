@@ -253,6 +253,13 @@
     padding:18px 0 26px;
   }
   .card .art svg{ width:100%; height:auto; max-height:150px; }
+  .card .art img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    border-radius:2px;
+  }
+  .card.large .art img, .card.wide .art img{ height:260px; }
   .card .meta{
     display:flex; justify-content:space-between; align-items:baseline;
     border-top:1px dashed rgba(34,23,18,0.3);
@@ -611,117 +618,8 @@
       <p>Una selección de nuestros estilos más buscados esta temporada.</p>
     </div>
 
-    <div class="grid">
-
-      <div class="card large">
-        <div class="art">
-          <svg viewBox="0 0 200 140" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <path d="M35 60 C35 45 55 35 100 35 C145 35 165 45 165 60 L172 118 C172 126 165 132 156 132 L44 132 C35 132 28 126 28 118 Z"/>
-            <path d="M60 60 L60 45 C60 33 75 24 100 24 C125 24 140 33 140 45 L140 60"/>
-            <rect x="90" y="70" width="20" height="16" rx="2" stroke="#b4936f"/>
-            <path d="M35 90 L165 90" stroke-dasharray="2 4"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Sobre Rioja</h3>
-            <p class="tag">Cartera de mano · cognac</p>
-          </div>
-          <span class="price">$148.000</span>
-        </div>
-        <button class="add-to-cart" data-id="sobre-rioja" data-name="Sobre Rioja" data-price="148000">Agregar a la bolsa</button>
-      </div>
-
-      <div class="card medium">
-        <div class="art">
-          <svg viewBox="0 0 160 140" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <rect x="35" y="45" width="90" height="70" rx="4"/>
-            <path d="M35 45l45-30 45 30" stroke-dasharray="2 4"/>
-            <circle cx="80" cy="80" r="4" fill="#b4936f" stroke="none"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Bandolera Caleta</h3>
-            <p class="tag">Bandolera · negro</p>
-          </div>
-          <span class="price">$121.500</span>
-        </div>
-        <button class="add-to-cart" data-id="bandolera-caleta" data-name="Bandolera Caleta" data-price="121500">Agregar a la bolsa</button>
-      </div>
-
-      <div class="card medium">
-        <div class="art">
-          <svg viewBox="0 0 160 140" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <rect x="45" y="35" width="70" height="50" rx="3"/>
-            <path d="M45 47h70" stroke-dasharray="2 3"/>
-            <rect x="70" y="60" width="20" height="14" rx="2"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Billetera Alsina</h3>
-            <p class="tag">Billetera · avellana</p>
-          </div>
-          <span class="price">$52.000</span>
-        </div>
-        <button class="add-to-cart" data-id="billetera-alsina" data-name="Billetera Alsina" data-price="52000">Agregar a la bolsa</button>
-      </div>
-
-      <div class="card wide">
-        <div class="art">
-          <svg viewBox="0 0 260 130" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <rect x="60" y="35" width="140" height="80" rx="3"/>
-            <path d="M60 45v-3a10 10 0 0110 0v3M190 45v-3a10 10 0 0110 0v3" />
-            <path d="M75 35v80M105 35v80" stroke-dasharray="0"/>
-            <path d="M60 60h140" stroke-dasharray="2 4"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Mochila Colina</h3>
-            <p class="tag">Mochila de un cuerpo · terracota</p>
-          </div>
-          <span class="price">$189.000</span>
-        </div>
-        <button class="add-to-cart" data-id="mochila-colina" data-name="Mochila Colina" data-price="189000">Agregar a la bolsa</button>
-      </div>
-
-      <div class="card narrow">
-        <div class="art">
-          <svg viewBox="0 0 160 140" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <path d="M35 55 C35 42 55 33 80 33 C105 33 125 42 125 55 L130 105 C130 112 124 118 116 118 L44 118 C36 118 30 112 30 105 Z"/>
-            <path d="M50 55 L50 44 C50 34 63 27 80 27 C97 27 110 34 110 44 L110 55"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Cartera Pilar</h3>
-            <p class="tag">Cartera cruzada · miel</p>
-          </div>
-          <span class="price">$97.000</span>
-        </div>
-        <button class="add-to-cart" data-id="cartera-pilar" data-name="Cartera Pilar" data-price="97000">Agregar a la bolsa</button>
-      </div>
-
-      <div class="card narrow">
-        <div class="art">
-          <svg viewBox="0 0 160 140" fill="none" stroke="#a6864f" stroke-width="1.1">
-            <rect x="40" y="40" width="80" height="55" rx="3"/>
-            <path d="M40 55h80" stroke-dasharray="2 3"/>
-            <path d="M60 40v55M100 40v55"/>
-          </svg>
-        </div>
-        <div class="meta">
-          <div>
-            <h3>Billetera Serrano</h3>
-            <p class="tag">Portadocumentos · negro</p>
-          </div>
-          <span class="price">$61.000</span>
-        </div>
-        <button class="add-to-cart" data-id="billetera-serrano" data-name="Billetera Serrano" data-price="61000">Agregar a la bolsa</button>
-      </div>
-
+    <div class="grid" id="product-grid">
+      <p id="product-loading" style="grid-column:1/-1; text-align:center; color:#8f887e; padding:40px 0;">Cargando piezas...</p>
     </div>
   </div>
 </section>
@@ -857,5 +755,6 @@
 </div>
 
 <script src="cart.js"></script>
+<script src="products.js"></script>
 </body>
 </html>
