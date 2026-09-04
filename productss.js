@@ -7,7 +7,7 @@
 // Reemplazá el valor de abajo por el link de TU planilla publicada
 // (ver instrucciones en COMO-ACTUALIZAR-PRODUCTOS.md).
 
-const SHEET_CSV_URL = 'PEGA_ACA_EL_LINK_DE_TU_PLANILLA_PUBLICADA';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6VjngkA44XyV7lECiniHQPe5KSSFqM84cdNRkGz6hlm6-dzrFopmcswqMnHjgRrYn4WnC3B4MxGM3/pubhtml';
 
 // Tamaños de tarjeta que se van repitiendo para que la grilla se vea
 // pareja aunque cambie la cantidad de productos.
