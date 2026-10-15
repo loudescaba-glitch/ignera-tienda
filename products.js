@@ -139,6 +139,7 @@ function renderProducts(products) {
             </div>
             <span class="price">$${precioFormateado}</span>
           </div>
+          <a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/5491166863434?text=${encodeURIComponent('Hola Ignera, quiero consultar por: ' + p.nombre)}">Consultar por WhatsApp</a>
           <button class="add-to-cart" data-id="${id}" data-name="${p.nombre}" data-price="${precioNumero}">Agregar a la bolsa</button>
         </div>
       `;
