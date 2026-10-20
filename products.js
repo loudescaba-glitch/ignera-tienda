@@ -94,9 +94,11 @@ function slugify(text) {
 // Una sección solo aparece si tiene al menos un producto.
 const CATEGORIAS = [
   { id: 'carteras', titulo: 'Carteras' },
+  { id: 'billeteras', titulo: 'Billeteras' },
   { id: 'zapatillas', titulo: 'Zapatillas' },
   { id: 'gorros', titulo: 'Gorros' },
-  { id: 'pulseras', titulo: 'Pulseras' },
+  { id: 'pulseras', titulo: 'Pulseras y brazaletes' },
+  { id: 'portalentes', titulo: 'Portalentes y portallaves' },
 ];
 
 // Si la planilla tiene una columna "categoria" se usa esa. Si no, la sección
@@ -113,7 +115,9 @@ function categoriaDe(p) {
     .replace(/[̀-ͯ]/g, '');
   if (/zapatilla/.test(n)) return 'zapatillas';
   if (/gorr|sombrero|visera/.test(n)) return 'gorros';
-  if (/pulsera|munequera/.test(n)) return 'pulseras';
+  if (/billetera/.test(n)) return 'billeteras';
+  if (/portalente|portallave/.test(n)) return 'portalentes';
+  if (/pulsera|brazalete|munequera/.test(n)) return 'pulseras';
   return 'carteras';
 }
 
