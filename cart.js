@@ -99,6 +99,9 @@ function renderCart() {
   }
 
   if (totalEl) totalEl.textContent = formatARS(cartTotal());
+
+  const tbox = document.getElementById('transfer-box');
+  if (tbox && tbox.classList.contains('open')) renderTransfer();
 }
 
 function openCart() {
@@ -143,6 +146,59 @@ async function checkout() {
     alert('No se pudo conectar con el servidor de pagos. Revisá tu conexión e intentá de nuevo.');
     btn.disabled = false;
     btn.textContent = 'Finalizar compra';
+  }
+}
+
+// ---------- Pago por transferencia ----------
+// Muestra el alias, el total y un botón de WhatsApp con el pedido armado.
+// La confirmación del pago la hace Ignera a mano al recibir el comprobante.
+const TRANSFER_ALIAS = 'accesorios.ignera';
+const WHATSAPP_NUMBER = '5491166863434';
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function renderTransfer() {
+  const box = document.getElementById('transfer-box');
+  if (!box) return;
+  const cart = getCart();
+  if (cart.length === 0) {
+    box.innerHTML = '<p>Agregá alguna pieza a tu bolsa para pagar por transferencia.</p>';
+    return;
+  }
+  const lines = cart.map((i) => `${i.qty} x ${i.name} (${formatARS(i.price * i.qty)})`).join('\n');
+  const msg =
+    'Hola Ignera, quiero comprar por transferencia:\n' + lines +
+    '\nTotal: ' + formatARS(cartTotal()) +
+    '\nTe paso el comprobante y mis datos de envío por Andreani.';
+  const wa = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+  box.innerHTML = `
+    <p>Transferí <strong>${formatARS(cartTotal())}</strong> al alias:</p>
+    <div class="t-alias"><span>${escapeHtml(TRANSFER_ALIAS)}</span>
+      <button type="button" class="t-copy" onclick="copyAlias(this)">Copiar</button></div>
+    <p>Después mandanos el comprobante y tus datos de envío por WhatsApp. Confirmamos tu pedido y te pasamos el costo del envío por Andreani, que se abona aparte.</p>
+    <a class="t-wa" target="_blank" rel="noopener" href="${wa}">Enviar comprobante por WhatsApp</a>
+  `;
+}
+
+function toggleTransfer() {
+  const box = document.getElementById('transfer-box');
+  if (!box) return;
+  const open = !box.classList.contains('open');
+  box.classList.toggle('open', open);
+  if (open) renderTransfer();
+}
+
+function copyAlias(btn) {
+  const done = () => {
+    btn.textContent = 'Copiado ✓';
+    setTimeout(() => { btn.textContent = 'Copiar'; }, 1500);
+  };
+  try {
+    navigator.clipboard.writeText(TRANSFER_ALIAS).then(done, done);
+  } catch (e) {
+    done();
   }
 }
 
